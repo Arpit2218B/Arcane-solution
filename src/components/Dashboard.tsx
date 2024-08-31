@@ -19,7 +19,11 @@ export const Dashboard: React.FC = () => {
               if (existing) {
                 return existing;
               }
-              return condition;
+              // directly copying the condition object copied the same instance of the object in both the sources.
+              // So for conditions which had no initial value, same instance was copied to both sources and hence change in
+              // one instance was reflecting in the other.
+              // Solution - changed it to deep copy using spread operator (here it a simple object so spread operator can be sued for deep copy)
+              return {...condition};
             }),
           },
         };
